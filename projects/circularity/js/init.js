@@ -24,19 +24,19 @@ var init = function (window) {
         var circles = [];
 
         // TODO 2 : Create a function that draws a circle 
-            function drawCircle() {
-            circle = draw.randomCircleInArea(canvas, true, true, '#999', 2);
-            physikz.addRandomVelocity(circle, canvas);
-            view.addChild(circle);
-            circles.push(circle);
+            function drawCircle(){
+                circle = draw.randomCircleInArea(canvas, true, true, '#999', 2);
+                physikz.addRandomVelocity(circle, canvas);
+                view.addChild(circle);
+                circles.push(circle);
         }
 
         // TODO 3 / 7 : Call the drawCircle() function 
-        drawCirlce();
-        drawCircle();
-        drawCircle();
-        drawCircle();
-        drawCircle();
+        
+        for ( var loopsDone = 0; loopsDone <= 100; loopsDone++){
+            drawCircle()
+        };
+        
         ////////////////////////////////////////////////////////////
         ///////////////// PROGRAM LOGIC ////////////////////////////
         ////////////////////////////////////////////////////////////
@@ -48,13 +48,15 @@ var init = function (window) {
         */
         function update() {
             // TODO 4 : Update the circle's position //
-
-            
+           //we used a loop to iterate over the entire array
             // TODO 5 / 10 : Call game.checkCirclePosition() on your circles.
-           
-
+            //we used a loop to iterate over the entire array
             // TODO 9 : Iterate over the array
-           
+           for ( var i = 0; i < circles.length; i++){
+            var eachCircle = circles[i]
+            physikz.updatePosition(eachCircle)
+            game.checkCirclePosition(eachCircle)
+           }
             
         }
     
@@ -71,9 +73,18 @@ var init = function (window) {
             }
             
             // TODO 6 : YOUR CODE STARTS HERE //////////////////////
-            
-
-
+            //if circle goes off LEFT it comes on RIGHT
+            if ( circle.x < 0 ) {
+                circle.x = canvas.width;
+            }
+            //if circle goes off TOP it comes on BOTTOM
+            if ( circle.y > canvas.height ) {
+                circle.y = 0;
+            }
+            //if circle goes off BOTTOM it comes on TOP
+            if (circle.y < 0){
+                circle.y = canvas.height;
+            }
             // YOUR TODO 6 CODE ENDS HERE //////////////////////////
         }
         
